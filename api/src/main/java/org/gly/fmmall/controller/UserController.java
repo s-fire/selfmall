@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 @Api(value = "提供用户管理相关接口", tags = "用户管理")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;

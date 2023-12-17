@@ -1,7 +1,7 @@
 package org.gly.fmmall.vo;
 
 public class ResStatus {
-    private static final int OK = 10000;
+    public static final int OK = 10000;
     public static final int NO = 10001;
 
     public static final int LOGIN_SUCCESS = 2000;  //认证成功
