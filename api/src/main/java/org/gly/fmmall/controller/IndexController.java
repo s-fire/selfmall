@@ -1,6 +1,8 @@
 package org.gly.fmmall.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.gly.fmmall.service.CategoryService;
 import org.gly.fmmall.service.IndexImagesService;
 import org.gly.fmmall.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
     @Autowired
     IndexImagesService indexImagesService;
+    @Autowired
+    CategoryService categoryService;
+
     @GetMapping("/imageList")
-    public ResultVO listIndexImgs(){
+    @ApiOperation("首页轮播图")
+    public ResultVO listIndexImgs() {
         return indexImagesService.queryIndexImages();
+    }
+
+    @GetMapping("/category-list")
+    @ApiOperation("分类列表接口")
+    public ResultVO listCategory() {
+        return categoryService.selectAllCategories();
     }
 }
