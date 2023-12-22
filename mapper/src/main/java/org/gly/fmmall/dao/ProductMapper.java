@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface ProductMapper extends GeneralDAO<Product> {
     public List<ProductVO> selectRecommendProducts();
+
+    public List<ProductVO> selectTop6ByCategoryId(int categoryId);
+
 }

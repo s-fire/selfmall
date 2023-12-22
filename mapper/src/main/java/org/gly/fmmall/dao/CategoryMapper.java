@@ -10,4 +10,6 @@ import java.util.List;
 public interface CategoryMapper extends GeneralDAO<Category> {
     public List<CategoryVO> selectAllCategories();
     public List<CategoryVO> selectAllCategories2(int parentId);
+
+    public List<CategoryVO> selectFirstLevelCategories();
 }

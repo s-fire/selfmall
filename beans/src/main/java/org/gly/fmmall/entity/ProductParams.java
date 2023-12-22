@@ -1,8 +1,9 @@
 package org.gly.fmmall.entity;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Date;
 import javax.persistence.*;
-
 @Table(name = "product_params")
 public class ProductParams {
     /**
