@@ -8,4 +8,5 @@ public interface ProductService {
     public ResultVO getProductBasicsInfo(String productId);
 
     public ResultVO getProductParamsByProductId(String productId);
+
 }

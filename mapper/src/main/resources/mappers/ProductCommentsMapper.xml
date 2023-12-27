@@ -21,4 +21,49 @@
     <result column="reply_time" jdbcType="TIMESTAMP" property="replyTime" />
     <result column="is_show" jdbcType="INTEGER" property="isShow" />
   </resultMap>
+
+  <resultMap id="BaseResultVOMap" type="org.gly.fmmall.entity.ProductCommentsVO">
+    <id column="comm_id" jdbcType="VARCHAR" property="commId" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="order_item_id" jdbcType="VARCHAR" property="orderItemId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="is_anonymous" jdbcType="INTEGER" property="isAnonymous" />
+    <result column="comm_type" jdbcType="INTEGER" property="commType" />
+    <result column="comm_level" jdbcType="INTEGER" property="commLevel" />
+    <result column="comm_content" jdbcType="VARCHAR" property="commContent" />
+    <result column="comm_imgs" jdbcType="VARCHAR" property="commImgs" />
+    <result column="sepc_name" jdbcType="TIMESTAMP" property="sepcName" />
+    <result column="reply_status" jdbcType="INTEGER" property="replyStatus" />
+    <result column="reply_content" jdbcType="VARCHAR" property="replyContent" />
+    <result column="reply_time" jdbcType="TIMESTAMP" property="replyTime" />
+    <result column="is_show" jdbcType="INTEGER" property="isShow" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+  </resultMap>
+  <select id="selectProductCommentByProductId" resultMap="BaseResultVOMap">
+    select comm_id,
+           product_id,
+           product_name,
+           order_item_id,
+           is_anonymous,
+           comm_type,
+           comm_level,
+           comm_content,
+           comm_imgs,
+           sepc_name,
+           reply_status,
+           reply_content,
+           reply_time,
+           is_show,
+           u.user_id,
+           username,
+           nickname,
+           user_img
+    from product_comments p
+           inner join users u on p.user_id = u.user_id
+    where p.product_id = #{productId}
+    limit #{start},#{limit}
+  </select>
 </mapper>
