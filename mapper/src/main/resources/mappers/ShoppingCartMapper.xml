@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.gly.fmmall.dao.ShoppingCartMapper">
   <resultMap id="BaseResultMap" type="org.gly.fmmall.entity.ShoppingCart">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="cart_id" jdbcType="INTEGER" property="cartId" />
     <result column="product_id" jdbcType="VARCHAR" property="productId" />
     <result column="sku_id" jdbcType="VARCHAR" property="skuId" />
@@ -14,4 +11,33 @@
     <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
     <result column="sku_props" jdbcType="VARCHAR" property="skuProps" />
   </resultMap>
+
+  <resultMap id="BaseResultVOMap" type="org.gly.fmmall.entity.ShoppingCartVO">
+    <id column="cart_id" jdbcType="INTEGER" property="cartId" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="sku_id" jdbcType="VARCHAR" property="skuId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="cart_num" jdbcType="VARCHAR" property="cartNum" />
+    <result column="cart_time" jdbcType="VARCHAR" property="cartTime" />
+    <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
+    <result column="sku_props" jdbcType="VARCHAR" property="skuProps" />
+
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="url" jdbcType="VARCHAR" property="productImg" />
+    <result column="original_price" jdbcType="VARCHAR" property="originalPrice" />
+    <result column="sell_price" jdbcType="VARCHAR" property="sellPrice" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+  </resultMap>
+  <select id="selectShopCartListByUserId" resultMap="BaseResultVOMap">
+      select s.*,p.product_name,pImg.url,pSku.sku_name,pSku.original_price,pSku.sell_price
+      from shopping_cart s
+               inner join product p
+               inner join product_img pImg
+               inner join product_sku pSku
+                          on s.product_id = p.product_id and s.sku_id = pSku.sku_id and s.product_id = pImg.item_id and pImg.is_main=1
+      where s.user_id = ${userId}
+  </select>
+    <update id="updateCartById" >
+        update shopping_cart set cart_num = #{carNum} where cart_id = #{carId}
+    </update>
 </mapper>
