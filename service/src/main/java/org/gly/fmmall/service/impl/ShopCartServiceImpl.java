@@ -9,6 +9,7 @@ import org.gly.fmmall.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,5 +40,16 @@ public class ShopCartServiceImpl implements ShopCartService {
         }else{
             return new ResultVO(ResStatus.NO,"fail",null);
         }
+    }
+
+    @Override
+    public ResultVO listShopCarsByCids(String cids) {
+        String[] stringArr = cids.split(",");
+        ArrayList<Integer> intList = new ArrayList<>();
+        for (String s : stringArr) {
+            intList.add(Integer.parseInt(s));
+        }
+        List<ShoppingCartVO> shoppingCartVOList = shoppingCartMapper.selectShopCarsByCids(intList);
+        return new ResultVO(ResStatus.OK,"success",shoppingCartVOList);
     }
 }

@@ -34,4 +34,11 @@ public class ShoppCartController {
     public ResultVO updateCar(@PathVariable("cid") Integer cid,@PathVariable("cnum") Integer cnum){
         return shopCartService.updateShopCarByCarId(cid,cnum);
     }
+
+    @GetMapping("/listbycids")
+    @ApiOperation("根据ID查询购物车")
+    @ApiImplicitParam(dataType = "string",name = "ids",value = "购物车ID", required = true)
+    public ResultVO listShopCarByCarIds(String ids){
+        return shopCartService.listShopCarsByCids(ids);
+    }
 }

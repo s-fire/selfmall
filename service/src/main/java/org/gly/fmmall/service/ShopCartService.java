@@ -9,4 +9,6 @@ public interface ShopCartService {
     public ResultVO listShopCart(String userId);
 
     public ResultVO updateShopCarByCarId(int carId,int carNum);
+
+    public ResultVO listShopCarsByCids(String cids);
 }
